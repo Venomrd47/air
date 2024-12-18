@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME PAGE</title>
+    <link rel="stylesheet" href="value.css">
+</head>
+<body>
+    <div class="nav">
+        <img src="airways.png" alt="Airways Logo">
+        <nav>
+            <ul class="bar">
+                <li><a href="home.html">HOME</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+                <li><a href="">DEAL</a></li>
+                <li><a href="value.html">BOOKING</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="home">
+        <form onsubmit="event.preventDefault(); storeFormData();">
+            <label for="departure-city">Departure City</label>
+            <div class="source-box">
+                <input list="cities" id="departure-city" name="departure-city" placeholder="Enter or select departure city" required>
+                <datalist id="cities">
+                    <option value="✈Chennai, India (MAA)">
+                    <option value="✈Salem, India (SXV)">
+                    <option value="✈Madurai, India (IXM)">
+                    <option value="✈Tiruchirappalli, India (TRZ)">
+                    <option value="✈Coimbatore, India (CJB)">
+                    <option value="✈Tuticorin, India (TCR)">
+                </datalist>
+            </div>
+
+            <label for="return-city">Arrival City</label>
+            <div class="source-box">
+                <input list="cities" id="return-city" name="return-city" placeholder="Enter arrival city" required>
+                <datalist id="cities">
+                    <option value="✈Chennai, India (MAA)">
+                    <option value="✈Salem, India (SXV)">
+                    <option value="✈Madurai, India (IXM)">
+                    <option value="✈Tiruchirappalli, India (TRZ)">
+                    <option value="✈Coimbatore, India (CJB)">
+                    <option value="✈Tuticorin, India (TCR)">
+                </datalist>
+            </div>
+
+            <label for="departure-date">Departure Date</label>
+            <div class="source-box">
+                <input type="date" id="departure-date" name="departure-date" required>
+            </div>
+
+            <!-- Hidden return date field -->
+            <div id="return-date-container" style="display: none;">
+                <label for="return-date">Return Date</label>
+                <div class="source-box">
+                    <input type="date" id="return-date" name="return-date">
+                </div>
+            </div>
+
+            <label for="passenger-count">Passenger Count</label>
+            <div class="source-box">
+                <input type="number" id="passenger-count" name="passenger-count" placeholder="Enter passenger count" min="1" max="10" value="1" required>
+            </div>
+
+            <label>
+                <input type="radio" id="oneway" name="trip-type" value="One-Way" required> One-Way
+            </label>
+            <label>
+                <input type="radio" id="round-trip" name="trip-type" value="Round-Trip" required> Round-Trip
+            </label>
+
+            <button type="submit">SEARCH</button>
+        </form>
+    </div>
+
+    <footer class="footer-home">
+        <h3 id="footer-logo"><b>AIRWAYS</b></h3>
+        <ul class="footer-list">
+            <li>Book Now</li>
+            <li>Special Offers</li>
+            <li>Destinations</li>
+            <li>Customer Support</li>
+            <li>About Us</li>
+        </ul>
+    </footer>
+</body>
+
+<script>
+    // Get references to the radio buttons and the return date field container
+    const roundTripRadio = document.getElementById('round-trip');
+    const oneWayRadio = document.getElementById('oneway');
+    const returnDateContainer = document.getElementById('return-date-container');
+
+    // Add event listeners to show/hide the return date field based on trip type selection
+    roundTripRadio.addEventListener('change', function () {
+        if (this.checked) {
+            returnDateContainer.style.display = 'block'; // Show the return date field
+        }
+    });
+
+    oneWayRadio.addEventListener('change', function () {
+        if (this.checked) {
+            returnDateContainer.style.display = 'none'; // Hide the return date field
+        }
+    });
+
+    function storeFormData() {
+        // Get the values from the form inputs
+        const departureCity = document.getElementById('departure-city').value;
+        const returnCity = document.getElementById('return-city').value;
+        const departureDate = document.getElementById('departure-date').value;
+        const passengerCount = document.getElementById('passenger-count').value;
+        const tripType = document.querySelector('input[name="trip-type"]:checked').value;
+
+        // Store the values in localStorage
+        localStorage.setItem('departureCity', departureCity);
+        localStorage.setItem('returnCity', returnCity);
+        localStorage.setItem('departureDate', departureDate);
+        localStorage.setItem('passengerCount', passengerCount);
+        localStorage.setItem('tripType', tripType);
+
+        // Check if it's a round trip and store the return date if present
+        if (tripType === 'Round-Trip') {
+            const returnDate = document.getElementById('return-date').value;
+            localStorage.setItem('returnDate', returnDate);
+        }
+
+        // Redirect to the display page
+        window.location.href = 'process.html';
+    }
+    // Save the passenger count to localStorage
+    function savePassengerCount() {
+        const passengerCount = document.getElementById('passenger-count').value;
+        localStorage.setItem('passenger-Count', passengerCount);
+        window.location.href = 'flightSelection.html';  // Redirect to flight selection page
+    }
+</script>
+
+
+</html>

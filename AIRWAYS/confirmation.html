@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passenger Confirmation</title>
+</head>
+<style>
+    /* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color:#FABC3F;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
+    font-size: 2rem;
+}
+
+#passengerInfo {
+    max-width: 900px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 1.5rem;
+    color: #555;
+    margin-top: 20px;
+}
+
+p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 10px 0;
+}
+
+strong {
+    font-weight: bold;
+    color: #444;
+}
+
+/* Add horizontal rules between passenger info */
+hr {
+    margin: 30px 0;
+    border: none;
+    border-top: 1px solid #ddd;
+}
+
+/* Button to go back or submit */
+button {
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Media Queries for Responsive Design */
+@media screen and (max-width: 768px) {
+    #passengerInfo {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.75rem;
+    }
+
+    h2 {
+        font-size: 1.25rem;
+    }
+
+    p {
+        font-size: 0.95rem;
+    }
+
+    button {
+        width: 100%;
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1rem;
+    }
+
+    p {
+        font-size: 0.9rem;
+    }
+
+    button {
+        font-size: 0.9rem;
+    }
+}
+button {
+    width:150px;
+    padding: 15px;
+    font-size: 1.2rem;
+    color: #ffffff;
+    background-color: #35d0b3; 
+    border: none;
+    border-radius: 6px; 
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+    margin-left: 45%;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+</style>
+<body>
+    <h1>Passenger Confirmation</h1>
+    <div id="passengerInfo">
+    </div>
+    
+    <button onclick="window.location.href='payment.html';">SUBMIT</button>
+
+
+    <script>
+        window.onload = function() {
+            const passengersData = JSON.parse(localStorage.getItem('passengersData'));
+
+            if (passengersData) {
+                let html = '';
+                passengersData.forEach((passenger, index) => {
+                    html += `
+                        <h2>Adult ${index + 1}</h2>
+                        <p><strong>First & Middle Name:</strong> ${passenger.firstName}</p>
+                        <p><strong>Last Name:</strong> ${passenger.lastName}</p>
+                        <p><strong>Gender:</strong> ${passenger.gender}</p>
+                        <p><strong>Country Code:</strong> ${passenger.countryCode || 'N/A'}</p>
+                        <p><strong>Mobile No:</strong> ${passenger.mobileNo || 'N/A'}</p>
+                        <p><strong>Email:</strong> ${passenger.email || 'N/A'}</p>
+                        <p><strong>Frequent Flyer:</strong> ${passenger.frequentFlyer ? 'Yes' : 'No'}</p>
+                        <p><strong>Frequent Flyer Airline:</strong> ${passenger.airline || 'N/A'}</p>
+                        <p><strong>Frequent Flyer No:</strong> ${passenger.frequentFlyerNo || 'N/A'}</p>
+                        <p><strong>Wheelchair Required:</strong> ${passenger.wheelchair ? 'Yes' : 'No'}</p>
+                        <hr>
+                    `;
+                });
+
+                document.getElementById('passengerInfo').innerHTML = html;
+            }
+        };
+    </script>
+</body>
+</html>

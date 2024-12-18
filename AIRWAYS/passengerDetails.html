@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passenger Details</title>
+</head>
+<style>
+   
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif; 
+    margin: 0;
+    padding: 0;
+    background-color: #E6D9A2; 
+}
+
+h1, h2 {
+    text-align: center;
+    color: #343a40;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+
+form {
+    width: 37%;
+    margin: 40px auto; 
+    background-color: #ffffff; 
+    padding: 30px; 
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    background-color:rgb(218, 184, 82);
+}
+
+h2 {
+    margin-top: 40px; 
+    margin-bottom: 20px; 
+    font-size: 1.75rem; 
+    color: #495057; 
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #495057;
+}
+
+input[type="text"],
+input[type="email"],
+select {
+    width:410px;
+    padding: 12px;
+    margin-bottom: 24px; 
+    border: 2px solid #109eb7; 
+    border-radius: 10px;
+    font-size: 1rem;
+    background-color: #f8f9fa;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+select:focus {
+    border-color: #007bff;
+        background-color: #ffffff; 
+    outline: none; 
+}
+
+input[type="radio"] {
+    margin-right: 12px; 
+}
+
+div {
+    margin-bottom: 24px; 
+}
+
+button {
+    width:140px;
+    padding: 15px;
+    font-size: 1.2rem;
+    color: #ffffff;
+    background-color:rgb(76, 162, 228); 
+    border: none;
+    border-radius: 6px; 
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+    margin-left: 200px;
+}
+
+button:hover {
+    background-color: #6836aa;
+}
+input[type="checkbox"] {
+    margin-right: 10px; 
+}
+
+hr {
+    margin: 40px 0; 
+    border: none;
+    border-top: 1px solid #dee2e6; 
+}
+
+@media screen and (max-width: 768px) {
+    form {
+        padding: 20px; 
+    }
+
+    input[type="text"], input[type="email"], select {
+        width: calc(100% - 20px);
+    }
+
+    h2 {
+        font-size: 1.5rem; 
+    }
+}
+
+@media screen and (max-width: 480px) {
+    button {
+        padding: 12px;
+        font-size: 1rem; 
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+}
+
+</style>
+<body>
+    <h1>Passenger Details</h1>
+    <form id="passengerForm">
+        <div id="adultForms"></div>
+
+        <button type="button" onclick="saveFormData()">Submit</button>
+    </form>
+
+    <script>
+        
+        window.onload = function() {
+            const passengerCount = localStorage.getItem('passengerCount') || 1;
+            const adultForms = document.getElementById('adultForms');
+            
+            for (let i = 1; i <= passengerCount; i++) {
+                adultForms.innerHTML += `
+                    <h2>Adult ${i}</h2>
+                    <label for="firstName${i}">First & Middle Name</label>
+                    <input type="text" id="firstName${i}" placeholder="First & Middle Name" required>
+                    <label for="lastName${i}">Last Name</label>
+                    <input type="text" id="lastName${i}" placeholder="Last Name" required>
+                    
+                    <div>
+                        <label>Gender</label>
+                        <input type="radio" name="gender${i}" value="Male" required> Male
+                        <input type="radio" name="gender${i}" value="Female" required> Female
+                    </div>
+
+                    <label for="countryCode${i}">Country Code</label>
+                    <input type="text" id="countryCode${i}" placeholder="Country Code">
+                    
+                    <label for="mobileNo${i}">Mobile No</label>
+                    <input type="text" id="mobileNo${i}" placeholder="Mobile No (Optional)">
+                    
+                    <label for="email${i}">Email</label>
+                    <input type="email" id="email${i}" placeholder="Email">
+                    
+                    <label>
+                        <input type="checkbox" id="frequentFlyer${i}"> Frequent Flyer Number
+                    </label>
+
+                    <label for="airline${i}">Frequent Flyer Airline</label>
+                    <select id="airline${i}">
+                        <option value="">Select Airline</option>
+                        <option value="Airline 1">Airline 1</option>
+                        <option value="Airline 2">Airline 2</option>
+                    </select>
+                    
+                    <label for="frequentFlyerNo${i}">Frequent Flyer No</label>
+                    <input type="text" id="frequentFlyerNo${i}" placeholder="Frequent Flyer No">
+                    
+                    <label>
+                        <input type="checkbox" id="wheelchair${i}"> I require wheelchair
+                    </label>
+                    <hr>
+                `;
+            }
+        };
+        function saveFormData() {
+            const passengerCount = localStorage.getItem('passengerCount') || 1;
+            const passengers = [];
+
+            for (let i = 1; i <= passengerCount; i++) {
+                const passenger = {
+                    firstName: document.getElementById(`firstName${i}`).value,
+                    lastName: document.getElementById(`lastName${i}`).value,
+                    gender: document.querySelector(`input[name="gender${i}"]:checked`).value,
+                    countryCode: document.getElementById(`countryCode${i}`).value,
+                    mobileNo: document.getElementById(`mobileNo${i}`).value,
+                    email: document.getElementById(`email${i}`).value,
+                    frequentFlyer: document.getElementById(`frequentFlyer${i}`).checked,
+                    airline: document.getElementById(`airline${i}`).value,
+                    frequentFlyerNo: document.getElementById(`frequentFlyerNo${i}`).value,
+                    wheelchair: document.getElementById(`wheelchair${i}`).checked,
+                };
+
+                passengers.push(passenger);
+            }
+
+            localStorage.setItem('passengersData', JSON.stringify(passengers));
+            window.location.href = "confirmation.html";
+        }
+    </script>
+</body>
+</html>

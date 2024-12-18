@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="payment.css">
+</head>
+<body>
+    <nav>
+        <ul class="bar">
+            <li><a href="home.html">HOME</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+            <li><a href="#">SEARCH</a></li>
+            <li><a href="value.html">BOOKING</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div class=" box-left">
+            <h2>BILLING ADDRESS</h2>
+            <label for="name">Full name </label><br>
+            <input type="text" id="name" placeholder="Enter name"><br><br>
+            <label for="email">Email </label><br>
+            <input type="text" id="name" placeholder="Enter email"><br><br>
+            <label for="address">Address </label><br>
+            <input type="text" id="name" placeholder="Enter address"><br><br>
+            <label for="city">City </label><br>
+            <input type="text" id="name" placeholder="Enter city"><br><br>
+            <div id="zip">
+                <label for="state">State
+                    <br><select>
+                        <option>Choose state...</option>
+                        <option>TamilNadu</option>
+                        <option>kerala</option>
+                        <option>Andhra pradhesh</option>
+                        <option>Karnataka</option>
+                        <option>Assam</option>
+                        <option>Delhi</option>
+                        <option>Mumbai</option>
+                        <option>Banglore</option>
+                    </select></label>
+                <label for="Zip code">Zip code<br>
+                    <input type="number" placeholder="Zip code"></label>
+            </div>
+        </div>
+
+        <div class="box-right">
+            <h2>Payment</h2>
+            <label for="card">Accepted Card</label><br>
+            <img src="visa.png " alt="visa" class="logo">
+            <img src="card.png " alt="mastercard" class="logo">
+            <img src="credit-card.png " alt="creditcard" class="logo"><br><br>
+            <!-- <h4>Choose your card</h4><br> -->
+            <label for = "card-type">Debit card</label>
+            <input type="radio" id="card-type" name="type">
+            <label for = "card-type">Credit card</label>
+            <input type="radio" id="card-type" name="type">
+            <br>
+            <label for="card">Credit card number </label><br>
+            <input type="text" id="name" placeholder="Enter card number"><br><br>
+            <label for="expiry">Exp month </label><br>
+            <input type="month" id="name" placeholder="Enter Month"><br><br>
+            <div id="zip"><label for="exp year">Exp year <br>
+            <select>
+                <option>Choose Year...</option>
+                <option>2024</option>
+                <option>2025</option>
+                <option>2026</option>
+                <option>2027</option>
+                <option>2028</option>
+                <option>2029</option>
+                <option>2030</option>
+            </select></label>
+            <label for="CVV">CVV <br>
+            <input type="number"  placeholder="CVV"></label>
+        </div>
+            <button id="paymentButton">Proceed to Checkout</button>
+        </div>
+    </div>
+    <div id="popup" class="popup">
+        <div class="popup-content">
+          <span id="closeBtn" class="close">&times;</span>
+          <p>Process Completed!</p>
+        </div>
+    </div>
+    <script src="payment.js"></script>
+   
+</body>
+</html>
+
